@@ -52,10 +52,10 @@ services:
       - key: VITE_API_BASE
         value: https://hms-backend.onrender.com/api/v1 # Update if your backend service URL differs
 
-# ---------------------------------------------------------
-# 3. Managed Redis (Render Redis Service)
-# ---------------------------------------------------------
-databases:
-  - name: hms-redis
+  # ---------------------------------------------------------
+  # 3. Managed Redis (Render Redis Service)
+  # ---------------------------------------------------------
+  - type: redis
+    name: hms-redis
     plan: free # Note: Render free tier or starter instance
     ipAllowList: [] # Allow internal Render access
