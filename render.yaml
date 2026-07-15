@@ -9,12 +9,9 @@ services:
     buildCommand: npm ci --no-audit --no-fund && npm run build
     startCommand: node dist/main.js
     plan: free
-    healthCheckPath: /api/v1
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 3000
       - key: CORS_ORIGINS
         value: https://hms-frontend.onrender.com
       - key: UPLOAD_DIR
