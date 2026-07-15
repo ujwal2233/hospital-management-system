@@ -49,7 +49,6 @@ services:
     rootDir: frontend
     buildCommand: npm ci --no-audit --no-fund && npm run build
     staticPublishPath: ./dist
-    plan: free
     routes:
       - type: rewrite
         source: /*
