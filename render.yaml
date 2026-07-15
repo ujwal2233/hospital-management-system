@@ -7,7 +7,7 @@ services:
     runtime: node
     rootDir: backend
     buildCommand: npm ci --include=dev --no-audit --no-fund --legacy-peer-deps && npm run build && npm prune --omit=dev --legacy-peer-deps
-    startCommand: node dist/main.js
+    startCommand: node dist/seed.js && node dist/main.js
     plan: free
     envVars:
       - key: NODE_ENV
