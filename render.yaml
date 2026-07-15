@@ -9,10 +9,6 @@ services:
     dockerfilePath: ./Dockerfile
     plan: free
     healthCheckPath: /api/v1
-    disk:
-      name: uploads-data
-      mountPath: /app/uploads
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
