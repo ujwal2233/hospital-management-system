@@ -86,28 +86,6 @@ const Login: React.FC = () => {
           <Button type="submit" className="w-full" loading={loading}>
             Sign In
           </Button>
-
-          {/* Quick-fill hints */}
-          <div className="border-t border-gray-100 pt-4 space-y-2">
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Quick fill</p>
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { label: 'Super Admin', email: 'superadmin@hms.local', password: 'Admin@123', code: '' },
-                { label: 'Hospital Admin', email: 'admin@cgh.local', password: 'Admin@123', code: 'CGH' },
-                { label: 'Doctor', email: 'dr.asha@cgh.local', password: 'Doctor@123', code: 'CGH' },
-                { label: 'Receptionist', email: 'reception@cgh.local', password: 'Front@123', code: 'CGH' },
-              ].map((u) => (
-                <button
-                  key={u.label}
-                  type="button"
-                  onClick={() => { setEmail(u.email); setPassword(u.password); setTenantCode(u.code); setError(null); }}
-                  className="text-left px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-emerald-50 hover:border-emerald-300 text-xs font-semibold text-gray-600 transition-colors"
-                >
-                  {u.label}
-                </button>
-              ))}
-            </div>
-          </div>
         </form>
       </div>
     </div>
