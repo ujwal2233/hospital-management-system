@@ -13,7 +13,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: CORS_ORIGINS
-        value: https://hms-frontend.onrender.com
+        value: https://hms-frontend-pqsv.onrender.com,https://hms-frontend.onrender.com
       - key: UPLOAD_DIR
         value: /tmp/uploads
       - key: JWT_ACCESS_EXPIRES
@@ -56,7 +56,7 @@ services:
         value: no-cache
     envVars:
       - key: VITE_API_BASE
-        value: https://hms-backend.onrender.com/api/v1
+        value: https://hms-backend-bs3f.onrender.com/api/v1
 
   # ---------------------------------------------------------
   # 3. Managed Redis
