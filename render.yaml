@@ -1,0 +1,65 @@
+services:
+  # ---------------------------------------------------------
+  # 1. NestJS Backend API (Docker Web Service)
+  # ---------------------------------------------------------
+  - type: web
+    name: hms-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/v1
+    disk:
+      name: uploads-data
+      mountPath: /app/uploads
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: CORS_ORIGINS
+        value: https://hms-frontend.onrender.com # Update after frontend deployment or add both URLs
+      - key: UPLOAD_DIR
+        value: /app/uploads
+      - key: JWT_ACCESS_EXPIRES
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES
+        value: 7d
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: hms-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: hms-redis
+          property: port
+      - key: MONGODB_URI
+        sync: false # Set manually in Render dashboard using your MongoDB Atlas URI
+
+  # ---------------------------------------------------------
+  # 2. React + Vite Frontend (Docker Web Service via Nginx)
+  # ---------------------------------------------------------
+  - type: web
+    name: hms-frontend
+    runtime: docker
+    rootDir: frontend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: VITE_API_BASE
+        value: https://hms-backend.onrender.com/api/v1 # Update if your backend service URL differs
+
+# ---------------------------------------------------------
+# 3. Managed Redis (Render Redis Service)
+# ---------------------------------------------------------
+databases:
+  - name: hms-redis
+    plan: free # Note: Render free tier or starter instance
+    ipAllowList: [] # Allow internal Render access
