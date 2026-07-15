@@ -6,7 +6,7 @@ services:
     name: hms-backend
     runtime: node
     rootDir: backend
-    buildCommand: npm ci --no-audit --no-fund --legacy-peer-deps && npm run build
+    buildCommand: npm ci --include=dev --no-audit --no-fund --legacy-peer-deps && npm run build && npm prune --omit=dev --legacy-peer-deps
     startCommand: node dist/main.js
     plan: free
     envVars:
@@ -44,7 +44,7 @@ services:
     name: hms-frontend
     runtime: static
     rootDir: frontend
-    buildCommand: npm ci --no-audit --no-fund --legacy-peer-deps && npm run build
+    buildCommand: npm ci --include=dev --no-audit --no-fund --legacy-peer-deps && npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite
